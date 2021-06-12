@@ -1,8 +1,5 @@
 package domain;
-
 import lombok.Data;
-
-@Data
 
 public enum TipoPrenda {
 	SACO("Saco"),
@@ -23,6 +20,9 @@ public enum TipoPrenda {
     public String getDescripcion() {
     	return descripcion;
     }
+
 	
+	
+    
 	
 }
