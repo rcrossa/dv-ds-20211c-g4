@@ -1,4 +1,4 @@
-package ar.edu.davinci.dvds2021cg4.domain;
+package domain;
 
 import lombok.Data;
 
