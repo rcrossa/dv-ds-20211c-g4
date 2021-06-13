@@ -1,4 +1,4 @@
-package domain;
+package ar.edu.davinci.dvds2021cg4.domain;
 
 import java.math.BigDecimal;
 
