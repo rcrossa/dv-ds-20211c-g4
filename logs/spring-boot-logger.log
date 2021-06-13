@@ -5140,3 +5140,5 @@ java.sql.SQLSyntaxErrorException: Unknown database 'dv-ds-20211c-g0'
 2021-06-12 18:51:15,187 INFO org.springframework.boot.availability.ApplicationAvailabilityBean [restartedMain] Application availability state LivenessState changed to CORRECT
 2021-06-12 18:51:15,189 INFO org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener [restartedMain] Condition evaluation unchanged
 2021-06-12 18:51:15,190 INFO org.springframework.boot.availability.ApplicationAvailabilityBean [restartedMain] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2021-06-12 18:51:53,317 INFO org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin [RMI TCP Connection(22)-127.0.0.1] Application shutdown requested.
+2021-06-12 18:51:53,318 INFO org.springframework.boot.availability.ApplicationAvailabilityBean [RMI TCP Connection(22)-127.0.0.1] Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
