@@ -34,20 +34,21 @@ import lombok.NoArgsConstructor;
 public class Prenda {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name = "prd_id")
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "prd_id")
+    private Long id;
+    
+    @Column(name = "prd_descripcion")
+    private String descripcion;
 
-	@Column(name = "prd_precio_base")
-	private BigDecimal precioBase;
+    @Column(name = "prd_tipo_prenda")
+    @Enumerated(EnumType.STRING)
+    private TipoPrenda tipo;
+    
+    @Column(name = "prd_precio_base")
+    private BigDecimal precioBase;
 
-	@Column(name = "prd_tipo_prenda")
-	@Enumerated(EnumType.STRING)
-	private TipoPrenda tipo;
-	
-	@Column(name = "prd_descripcion")
-	private String descripcion;
 	
 
 }
