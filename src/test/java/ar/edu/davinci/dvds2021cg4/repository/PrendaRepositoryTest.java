@@ -24,7 +24,7 @@ class PrendaRepositoryTest {
 	void test() {
 	
 		assertNotNull(prendaRepository, "El repositorio es nulo.");
-        List<Prenda> prendas = (List<Prenda>) prendaRepository.findAll();
+        List<Prenda> prendas = prendaRepository.findAll();
 		
 		LOGGER.info("Prendas encontradas: " + prendas.size());
 
