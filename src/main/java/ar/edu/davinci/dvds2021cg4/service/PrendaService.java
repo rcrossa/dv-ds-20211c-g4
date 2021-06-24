@@ -21,6 +21,7 @@ public interface PrendaService {
 	List<Prenda> list();
 
 	Page<Prenda> list(Pageable pageable);
+
 	long count();
 
 }

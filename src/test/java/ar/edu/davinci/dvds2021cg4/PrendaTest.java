@@ -1,6 +1,7 @@
 package ar.edu.davinci.dvds2021cg4;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.math.BigDecimal;
 
@@ -19,7 +20,7 @@ class PrendaTest {
 		TipoPrenda tipo = TipoPrenda.CAMISA;
 		BigDecimal precioBase = new BigDecimal(10);
 		
-		//Prenda prenda = Prenda.class();
+		//when
 		Prenda prenda = Prenda.builder()
 		.id(id)
 		.descripcion(descripcion)

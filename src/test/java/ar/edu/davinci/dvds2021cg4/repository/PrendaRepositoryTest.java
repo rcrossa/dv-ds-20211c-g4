@@ -1,6 +1,9 @@
 package ar.edu.davinci.dvds2021cg4.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,38 +22,36 @@ class PrendaRepositoryTest {
 
 	@Autowired
 	private PrendaRepository prendaRepository;
-	
+
 	@Test
 	void test() {
-	
+
 		assertNotNull(prendaRepository, "El repositorio es nulo.");
-        List<Prenda> prendas = prendaRepository.findAll();
-		
+		List<Prenda> prendas = prendaRepository.findAll();
+
 		LOGGER.info("Prendas encontradas: " + prendas.size());
 
 		assertNotNull(prendas, "La lista de prendas es nula.");
 		assertTrue(prendas.size() > 0, "No existen prendas.");
 
 	}
-	
+
 	@Test
 	void testFindAllById() {
 		Long id = 4L;
 		Prenda prenda = null;
 		Optional<Prenda> prendaOpcional = prendaRepository.findById(id);
-		if (prendaOpcional.isPresent()){
+		if (prendaOpcional.isPresent()) {
 			prenda = prendaOpcional.get();
-			
+
 			LOGGER.info("Prenda encontrada: " + prenda);
 			assertEquals(TipoPrenda.PANTALON, prenda.getTipo());
-			
+
 		} else {
 			LOGGER.info("Prenda no encontrada, para el id: " + id);
 			assertNull(prenda);
-			
+
 		}
 	}
-
-	
 
 }
