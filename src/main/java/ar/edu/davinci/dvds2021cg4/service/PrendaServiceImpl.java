@@ -11,77 +11,93 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ar.edu.davinci.dvds2021cg4.domain.Prenda;
+import ar.edu.davinci.dvds2021cg4.domain.TipoPrenda;
 import ar.edu.davinci.dvds2021cg4.exception.BusinessException;
 import ar.edu.davinci.dvds2021cg4.repository.PrendaRepository;
 
 @Service
 public class PrendaServiceImpl implements PrendaService {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(PrendaServiceImpl.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(PrendaServiceImpl.class);    
+    
+    private final PrendaRepository repository;
+    
+    @Autowired
+    public PrendaServiceImpl(final PrendaRepository repository) {
+        this.repository = repository;
+    }
 
-	private final PrendaRepository repository;
+    @Override
+    public Prenda save(Prenda prenda) throws BusinessException {
+        LOGGER.debug("Grabamos la prenda con el id: " + prenda.getId());
+        
+        if (prenda.getId() == null) {
+            return repository.save(prenda);
+        }
+        throw new BusinessException("No se puede crear una prenda con un id específico");        
+        
+    }
 
-	@Autowired
-	public PrendaServiceImpl(final PrendaRepository repository) {
-		this.repository = repository;
-	}
+    @Override
+    public Prenda update(Prenda prenda) throws BusinessException {
+        LOGGER.debug("Modificamos la prenda con el id: " + prenda.getId());
+        
+        if (prenda.getId() != null) {
+            return repository.save(prenda);
+        }
+        throw new BusinessException("No se puede modificar una prenda no creada");        
+    }
 
-	public Prenda save(Prenda prenda) throws BusinessException {
-		LOGGER.debug("Grabamos la prenda con el id: " + prenda.getId());
-		if (prenda.getId() == null) {
-			return repository.save(prenda);
-		}
-		throw new BusinessException("No se puede crear una prenda con un id especifico ");
-	}
+    @Override
+    public void delete(Prenda prenda) {
+        LOGGER.debug("Borrando la prenda con el id: " + prenda.getId());
+        
+        repository.delete(prenda);
+    }        
 
-	public Prenda update(Prenda prenda) throws BusinessException {
-		LOGGER.debug("Actualizamos la prenda con el id: " + prenda.getId());
-		if (prenda.getId() != null) {
-			return repository.save(prenda);
-		}
+    @Override
+    public Prenda findById(Long id) throws BusinessException {
+        LOGGER.debug("Busqueda de una prenda por ID");
+        
+        Optional<Prenda> prendaOptional = repository.findById(id);
+        if (prendaOptional.isPresent()) {
+            return prendaOptional.get();
+        }
+        
+        throw new BusinessException("No se encotró la prenda por el id: " + id);
+    }
 
-		throw new BusinessException("No se puede modificar una prenda no creada ");
-	}
+    @Override
+    public List<Prenda> list() {
+        LOGGER.debug("Listado de todas las prendas");
+        
+        return repository.findAll();
+    }
 
-	public void delete(Prenda prenda) {
-		LOGGER.debug("Borrando la prenda con el id " + prenda.getId());
-		repository.delete(prenda);
+    @Override
+    public Page<Prenda> list(Pageable pageable) {
+        LOGGER.debug("Listado de todas las prendas paginadas");
+        LOGGER.debug("Pageable, offset:" + pageable.getOffset() + ", pageSize: " + pageable.getPageSize()+ ", pageNumber: " + pageable.getPageNumber());
+        
+        return repository.findAll(pageable);
+    }
 
-	}
+    @Override
+    public long count() {
+        return repository.count();
+    }
 
-	public Prenda findById(Long id) throws BusinessException {
-		LOGGER.debug("Busqueda de una prenda por ID");
-		
-		Optional<Prenda> prendaOptional = repository.findById(id);
-		if (prendaOptional.isPresent()) {
-			return prendaOptional.get();
-		}
-		throw new BusinessException("No se encontro la prenda por el id " + id);
-	}
-
-
-
-	public List<Prenda> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Page<Prenda> list(Pageable pageable) {
-		LOGGER.debug("Listado de todas las prendas paginadas");
-		LOGGER.debug("Pageable, offset:" + pageable.getOffset() + ", pageSize: "+ pageable.getPageSize() + ", pageNumber: " + pageable.getPageNumber());
-		return repository.findAll(pageable);
-	}
+    @Override
+    public void delete(Long id) {
+        LOGGER.debug("Borrando la prenda con el id: " + id);
+        
+        repository.deleteById(id);
+    }
 
 	@Override
-	public List<Prenda> list() {
+	public List<TipoPrenda> getTipoPrendas() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	}    
 
 }
