@@ -1,8 +1,6 @@
 package ar.edu.davinci.dvds2021cg4.service;
 
 import java.util.List;
-
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -16,6 +14,7 @@ import ar.edu.davinci.dvds2021cg4.domain.Item;
 import ar.edu.davinci.dvds2021cg4.exception.BusinessException;
 import ar.edu.davinci.dvds2021cg4.repository.ItemRepository;
 
+@Service
 public class ItemServiceImpl implements ItemService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(ItemServiceImpl.class);

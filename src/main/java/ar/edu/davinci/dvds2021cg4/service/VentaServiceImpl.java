@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import ar.edu.davinci.dvds2021cg4.domain.Cliente;
 import ar.edu.davinci.dvds2021cg4.domain.Item;
@@ -23,6 +24,7 @@ import ar.edu.davinci.dvds2021cg4.repository.VentaEfectivoRepository;
 import ar.edu.davinci.dvds2021cg4.repository.VentaRepository;
 import ar.edu.davinci.dvds2021cg4.repository.VentaTarjetaRepository;
 
+@Service
 public class VentaServiceImpl implements VentaService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(VentaServiceImpl.class);

@@ -194,7 +194,7 @@ public class OrikaConfiguration {
                         .build();
                 
                 
-                VentaResponse.setId(venta.getId());
+                ventaResponse.setId(venta.getId());
                 ventaResponse.setCliente(cliente);
 
                 DateFormat formatearFecha = new SimpleDateFormat(Constantes.FORMATO_FECHA);
