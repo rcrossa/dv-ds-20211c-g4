@@ -36,6 +36,7 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 
+
 @Configuration
 
 public class OrikaConfiguration {
@@ -191,6 +192,7 @@ public class OrikaConfiguration {
                         .nombre(venta.getCliente().getNombre())
                         .apellido(venta.getCliente().getApellido())
                         .build();
+                
                 
                 VentaResponse.setId(venta.getId());
                 ventaResponse.setCliente(cliente);
