@@ -2,6 +2,8 @@ package ar.edu.davinci.dvds2021cg4.controller.rest;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,210 +32,210 @@ import ma.glasnost.orika.MapperFacade;
 @RestController
 public class PrendaControllerRest extends TiendaAppRest {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(PrendaControllerRest.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(PrendaControllerRest.class);    
 
-	@Autowired
-	private PrendaService service;
+    @Autowired
+    private PrendaService service;
+    
+    @Autowired
+    private MapperFacade mapper;
+    
+    /**
+     * Listar todos
+     */
+    @GetMapping(path = "/prendas/all")
+    public List<Prenda> getList() {
+        LOGGER.info("Lista todas las prendas");
+        
+        return service.list();
+    }
+    
+    /**
+     * Listar paginado
+     */
+    @GetMapping(path = "/prendas")
+    public ResponseEntity<Page<PrendaResponse>> getList(Pageable pageable) {
+        
+        LOGGER.info("listar todas las prendas paginadas");
+        LOGGER.info("Pageable: " + pageable);
+        
+        Page<PrendaResponse> prendaResponse = null;
+        Page<Prenda> prendas = null;
+        try {
+            prendas = service.list(pageable);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        
+        for(Object prenda : prendas) {
+            
+            ((Prenda)prenda).getPrecioBase();
+            
+        }
+        try {
+            prendaResponse = prendas.map(prenda -> mapper.map(prenda, PrendaResponse.class));
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return new ResponseEntity<>(prendaResponse, HttpStatus.OK);
+    }
+    
+    
+    /**
+     * Buscar prenda por id
+     * @param id identificador del prenda
+     * @return retorna el prenda
+     */
+    @GetMapping(path = "/prendas/{id}")
+    public ResponseEntity<Object> getPrenda(@PathVariable Long id) {
+        LOGGER.info("lista al prenda solicitado");
 
-	@Autowired
-	private MapperFacade mapper;
+        PrendaResponse prendaResponse = null;
+        Prenda prenda = null;
+        try {
+            
+            prenda = service.findById(id);
 
-	/**
-	 * Listar todos
-	 */
-	@GetMapping(path = "/prendas/all")
-	public List<Prenda> getList() {
-		LOGGER.info("Lista todas las prendas");
+        } catch (BusinessException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        try {
+            prendaResponse = mapper.map(prenda, PrendaResponse.class);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(prendaResponse, HttpStatus.OK);
+    }
+    
+    /**
+     * Grabar una nueva prenda
+     * 
+     * @param datosPrenda son los datos para una nueva prenda
+     * @return un prenda nueva
+     */
+    @PostMapping(path = "/prendas")
+    public ResponseEntity<PrendaResponse> createPrenda(@RequestBody PrendaInsertRequest datosPrenda) {
+        Prenda prenda = null;
+        PrendaResponse prendaResponse = null;
 
-		return service.list();
-	}
+        // Convertir PrendaInsertRequest en Prenda
+        try {
+            prenda = mapper.map(datosPrenda, Prenda.class);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
 
-	/**
-	 * Listar paginado
-	 */
-	@GetMapping(path = "/prendas")
-	public ResponseEntity<Page<PrendaResponse>> getList(Pageable pageable) {
+        // Grabar el nuevo Prenda
+        try {
+            prenda = service.save(prenda);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+        }
 
-		LOGGER.info("listar todas las prendas paginadas");
-		LOGGER.info("Pageable: " + pageable);
+        // Convertir Prenda en PrendaResponse
+        try {
+            prendaResponse = mapper.map(prenda, PrendaResponse.class);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
 
-		Page<PrendaResponse> prendaResponse = null;
-		Page<Prenda> prendas = null;
-		try {
-			prendas = service.list(pageable);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
+        return new ResponseEntity<>(prendaResponse, HttpStatus.CREATED);
+    }
 
-		for (Object prenda : prendas) {
+    
+    /**
+     * Modificar los datos de un prenda
+     * 
+     * @param id identificador de una prenda
+     * @param datosPrenda datos a modificar de la prenda
+     * @return los datos de una prenda modificada
+     */
+    @PutMapping("/prendas/{id}")
+    public ResponseEntity<Object> updatePrenda(@PathVariable("id") long id,
+            @RequestBody PrendaUpdateRequest datosPrenda) {
 
-			((Prenda) prenda).getPrecioBase();
+        Prenda prendaModifar = null;
+        Prenda prendaNuevo = null;
+        PrendaResponse prendaResponse = null;
 
-		}
-		try {
-			prendaResponse = prendas.map(prenda -> mapper.map(prenda, PrendaResponse.class));
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
+        // Convertir PrendaInsertRequest en Prenda
+        try {
+            prendaNuevo = mapper.map(datosPrenda, Prenda.class);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        
+        try {
+            
+            prendaModifar = service.findById(id);
 
-		return new ResponseEntity<>(prendaResponse, HttpStatus.OK);
-	}
+        } catch (BusinessException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
 
-	/**
-	 * Buscar prenda por id
-	 * 
-	 * @param id identificador del prenda
-	 * @return retorna el prenda
-	 */
-	@GetMapping(path = "/prendas/{id}")
-	public ResponseEntity<Object> getPrenda(@PathVariable Long id) {
-		LOGGER.info("lista al prenda solicitado");
+        if (Objects.nonNull(prendaModifar)) {
+            prendaModifar.setDescripcion(prendaNuevo.getDescripcion());
+            prendaModifar.setTipo(prendaNuevo.getTipo());
+            prendaModifar.setPrecioBase(prendaNuevo.getPrecioBase());
+            // Grabar el Prenda Nuevo en Prenda a Modificar
+            try {
+                prendaModifar = service.update(prendaModifar);
+            } catch (BusinessException e) {
+                LOGGER.error(e.getMessage());
+                e.printStackTrace();
+                return new ResponseEntity<>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
+            } catch (Exception e) {
+                LOGGER.error(e.getMessage());
 
-		PrendaResponse prendaResponse = null;
-		Prenda prenda = null;
-		try {
+                e.printStackTrace();
 
-			prenda = service.findById(id);
+                return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+            }
+        } else {
+            LOGGER.error("Prenda a modificar es null");
 
-		} catch (BusinessException e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
 
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
-		try {
-			prendaResponse = mapper.map(prenda, PrendaResponse.class);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
-		return new ResponseEntity<>(prendaResponse, HttpStatus.OK);
-	}
+        // Convertir Prenda en PrendaResponse
+        try {
+            prendaResponse = mapper.map(prendaModifar, PrendaResponse.class);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
 
-	/**
-	 * Grabar una nueva prenda
-	 * 
-	 * @param datosPrenda son los datos para una nueva prenda
-	 * @return un prenda nueva
-	 */
-	@PostMapping(path = "/prendas")
-	public ResponseEntity<PrendaResponse> createPrenda(@RequestBody PrendaInsertRequest datosPrenda) {
-		Prenda prenda = null;
-		PrendaResponse prendaResponse = null;
+        return new ResponseEntity<>(prendaResponse, HttpStatus.CREATED);
+    }
 
-		// Convertir PrendaInsertRequest en Prenda
-		try {
-			prenda = mapper.map(datosPrenda, Prenda.class);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
-
-		// Grabar el nuevo Prenda
-		try {
-			prenda = service.save(prenda);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-		}
-
-		// Convertir Prenda en PrendaResponse
-		try {
-			prendaResponse = mapper.map(prenda, PrendaResponse.class);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
-
-		return new ResponseEntity<>(prendaResponse, HttpStatus.CREATED);
-	}
-
-	/**
-	 * Modificar los datos de un prenda
-	 * 
-	 * @param id          identificador de una prenda
-	 * @param datosPrenda datos a modificar de la prenda
-	 * @return los datos de una prenda modificada
-	 */
-	@PutMapping("/prendas/{id}")
-	public ResponseEntity<Object> updatePrenda(@PathVariable("id") long id,
-			@RequestBody PrendaUpdateRequest datosPrenda) {
-
-		Prenda prendaModifar = null;
-		Prenda prendaNuevo = null;
-		PrendaResponse prendaResponse = null;
-
-		// Convertir PrendaInsertRequest en Prenda
-		try {
-			prendaNuevo = mapper.map(datosPrenda, Prenda.class);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
-
-		try {
-
-			prendaModifar = service.findById(id);
-
-		} catch (BusinessException e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-		}
-
-		if (Objects.nonNull(prendaModifar)) {
-			prendaModifar.setDescripcion(prendaNuevo.getDescripcion());
-			prendaModifar.setTipo(prendaNuevo.getTipo());
-			prendaModifar.setPrecioBase(prendaNuevo.getPrecioBase());
-			// Grabar el Prenda Nuevo en Prenda a Modificar
-			try {
-				prendaModifar = service.update(prendaModifar);
-			} catch (BusinessException e) {
-				LOGGER.error(e.getMessage());
-				e.printStackTrace();
-				return new ResponseEntity<>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
-			} catch (Exception e) {
-				LOGGER.error(e.getMessage());
-
-				e.printStackTrace();
-
-				return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-			}
-		} else {
-			LOGGER.error("Prenda a modificar es null");
-
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		}
-
-		// Convertir Prenda en PrendaResponse
-		try {
-			prendaResponse = mapper.map(prendaModifar, PrendaResponse.class);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			e.printStackTrace();
-		}
-
-		return new ResponseEntity<>(prendaResponse, HttpStatus.CREATED);
-	}
-
-	/**
-	 * Borrado de la prenda
-	 * 
-	 * @param id identificador de una prenda
-	 * @return
-	 */
-	@DeleteMapping("/prendas/{id}")
-	public ResponseEntity<HttpStatus> deletePrenda(@PathVariable("id") Long id) {
-		try {
-			service.delete(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
-	}
-
+    /**
+     * Borrado de la  prenda
+     * @param id identificador de una prenda
+     * @return 
+     */
+    @DeleteMapping("/prendas/{id}")
+    public ResponseEntity<HttpStatus> deletePrenda(@PathVariable("id") Long id) {
+        try {
+            service.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+    
 }

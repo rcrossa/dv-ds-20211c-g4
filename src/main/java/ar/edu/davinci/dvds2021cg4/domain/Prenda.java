@@ -1,5 +1,5 @@
 package ar.edu.davinci.dvds2021cg4.domain;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -31,8 +31,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Prenda {
+public class Prenda implements Serializable{
 
+	private static final long serialVersionUID = 3202089571512147315L;
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -49,6 +51,8 @@ public class Prenda {
     @Column(name = "prd_precio_base")
     private BigDecimal precioBase;
 
-	
+	public BigDecimal getPrecioFinal() {
+		return precioBase;
+	}
 
 }

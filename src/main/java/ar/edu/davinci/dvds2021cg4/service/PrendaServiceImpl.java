@@ -97,7 +97,7 @@ public class PrendaServiceImpl implements PrendaService {
 	@Override
 	public List<TipoPrenda> getTipoPrendas() {
 		// TODO Auto-generated method stub
-		return null;
+		return TipoPrenda.getTipoPrendas();
 	}    
 
 }
