@@ -1,4 +1,4 @@
-package ar.edu.davinci.dvds2021cg4;
+package ar.edu.davinci.dvds2021cg4.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
