@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ar.edu.davinci</groupId>
-	<artifactId>dv-ds-20211c-g4</artifactId>
+	<artifactId>dv-ds-2021c-g4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Escuela Davinci- Diseño de Sistemas</description>
