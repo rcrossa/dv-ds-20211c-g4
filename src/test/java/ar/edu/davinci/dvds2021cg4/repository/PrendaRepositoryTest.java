@@ -9,14 +9,19 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import ar.edu.davinci.dvds2021cg4.domain.Prenda;
 import ar.edu.davinci.dvds2021cg4.domain.TipoPrenda;
 
-class PrendaRepositoryTest {
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+public class PrendaRepositoryTest {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(PrendaRepositoryTest.class);
 

@@ -25,6 +25,7 @@ class PrendaTest {
 		.id(id)
 		.descripcion(descripcion)
 		.tipo(tipo)
+		.precioBase(precioBase)
 		.build();
 		
 
