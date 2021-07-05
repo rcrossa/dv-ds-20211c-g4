@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +22,7 @@ import ar.edu.davinci.dvds2021cg4.domain.Cliente;
 import ar.edu.davinci.dvds2021cg4.exception.BusinessException;
 import ar.edu.davinci.dvds2021cg4.service.ClienteService;
 
+@Controller
 public class ClienteController extends TiendaApp{
 
 private final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
