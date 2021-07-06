@@ -141,10 +141,7 @@ public class OrikaConfiguration {
                 ventaResponse.setId(venta.getId());
                 ventaResponse.setCliente(cliente);
 
-                DateFormat formatearFecha = new SimpleDateFormat(Constantes.FORMATO_FECHA);
-                String fechaStr = formatearFecha.format(venta.getFecha());
-                
-                ventaResponse.setFecha(fechaStr);
+                ventaResponse.setFecha(venta.getFechaAsString());
                 ventaResponse.setImporteFinal(venta.importeFinal());
                 
                 ventaResponse.setItems(new ArrayList<ItemResponse>());
@@ -197,10 +194,7 @@ public class OrikaConfiguration {
                 ventaResponse.setId(venta.getId());
                 ventaResponse.setCliente(cliente);
 
-                DateFormat formatearFecha = new SimpleDateFormat(Constantes.FORMATO_FECHA);
-                String fechaStr = formatearFecha.format(venta.getFecha());
-                
-                ventaResponse.setFecha(fechaStr);
+                ventaResponse.setFecha(venta.getFechaAsString());
                 ventaResponse.setImporteFinal(venta.importeFinal());
                 
                 ventaResponse.setItems(new ArrayList<ItemResponse>());

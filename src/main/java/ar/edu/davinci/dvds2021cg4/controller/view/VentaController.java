@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.davinci.dvds2021cg4.controller.TiendaApp;
 import ar.edu.davinci.dvds2021cg4.domain.Venta;
+import ar.edu.davinci.dvds2021cg4.domain.VentaEfectivo;
+import ar.edu.davinci.dvds2021cg4.domain.VentaTarjeta;
 import ar.edu.davinci.dvds2021cg4.exception.BusinessException;
 import ar.edu.davinci.dvds2021cg4.service.VentaService;
 
@@ -43,18 +45,32 @@ public class VentaController extends TiendaApp {
 		return "ventas/list_ventas";
 	}
 
-	@GetMapping(path = "/ventas/new")
-	public String showNewVentaPage(Model model) {
-		LOGGER.info("GET - showNewVentaPage - /ventas/new");
-//        Venta venta = new Venta();
-//        model.addAttribute("venta", venta);
-//        model.addAttribute("tipoVentas", ventaService.getTipoVentas());
-//
-//        LOGGER.info("ventas: " + venta.toString());
+	@GetMapping(path = "/ventas/efectivo/new")
+	public String showNewVentaEfectivoPage(Model model) {
+		LOGGER.info("GET - showNewVentaPage - /ventas/efectivo/new");
+        Venta venta = new VentaEfectivo();
+        model.addAttribute("venta", venta);
+        model.addAttribute("razonSocial", venta.getRazonSocial());
+        model.addAttribute("fechaVenta", venta.getFechaAsString());
 
-		return "ventas/new_ventas";
+        LOGGER.info("ventas: " + venta.toString());
+
+		return "ventas/new_ventas_efectivo";
 	}
 
+	@GetMapping(path = "/ventas/tarjeta/new")
+	public String showNewVentaTarjetaPage(Model model) {
+		LOGGER.info("GET - showNewVentaPage - /ventas/tarjeta/new");
+        Venta venta = new VentaTarjeta();
+        model.addAttribute("venta", venta);
+        model.addAttribute("razonSocial", venta.getRazonSocial());
+        model.addAttribute("fechaVenta", venta.getFechaAsString());
+
+        LOGGER.info("ventas: " + venta.toString());
+
+		return "ventas/new_ventas_tarjeta";
+	}
+	
 	@PostMapping(value = "/ventas/save")
 	public String saveVenta(@ModelAttribute("venta") Venta venta) {
 		LOGGER.info("POST - saveVenta - /ventas/save");

@@ -3,6 +3,8 @@ package ar.edu.davinci.dvds2021cg4.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import ar.edu.davinci.dvds2021cg4.Constantes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -75,7 +78,7 @@ public abstract class Venta implements Serializable {
 	public abstract Double conRecargo(Double importeBase);
 
 	public String getRazonSocial() {
-		return cliente.getRazonSocial();
+		return (cliente != null) ? cliente.getRazonSocial() : "" ;
 	}
 
 	public BigDecimal importeBruto() {
@@ -105,4 +108,9 @@ public abstract class Venta implements Serializable {
 		this.items.add(item);
 	}
 
+	public String getFechaAsString() {
+		DateFormat formatearFecha = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+        return (fecha != null) ? formatearFecha.format(fecha) : "";
+	}
+	
 }
