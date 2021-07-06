@@ -14,7 +14,7 @@ class PrendaTest {
 
 	@Test
 	void test() {
-				//Given
+		// Given
 		Long id = 1l;
 		String descripcion = "camisa";
 		TipoPrenda tipo = TipoPrenda.CAMISA;
