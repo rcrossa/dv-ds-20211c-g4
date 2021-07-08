@@ -1,0 +1,589 @@
+{
+	"info": {
+		"_postman_id": "eccfeab7-68a8-4d8c-b18b-a56c31d4f3e7",
+		"name": "dv-ds-20211c",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Prendas",
+			"item": [
+				{
+					"name": "prendas/all - Prenda list All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas/all",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prendas - Prenda list paginado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prendas - Prenda list paginado x3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas?page=0&size=4&sort=descripcion",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "4"
+								},
+								{
+									"key": "sort",
+									"value": "descripcion"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prendas/{id} - Find Prenda by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas/12",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prendas - Prenda New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"Camisa Gris\",\n    \"precioBase\": 1645.24,\n    \"tipo\": \"CAMISA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prendas/{id} - Prenda Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"Camisa Blanca con mangas\",\n    \"tipo\": \"Camisa para vestir\",\n    \"precioBase\": 155.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas/5",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "prendas/{id} - Prenda Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/prendas/5",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"prendas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "clientes/all - Cleinte list All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/clientes/all",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"clientes",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/{id} - Find Cliente by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/clientes/3",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"clientes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes - Cliente list paginado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/clientes",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes - Cliente New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Pepito\",\n    \"apellido\": \"Mengano\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/clientes",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/{id} - Clinete Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Mengano\",\n    \"apellido\": \"Sultano\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/clientes/5",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"clientes",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clientes/{id} - Cliente Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/clientes/5",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"clientes",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ventas",
+			"item": [
+				{
+					"name": "get/efectivo/all - Venta listado all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/all",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/efectivo - Venta listado paginado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get/efectivo/{ventaId} - Venta por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/3",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ventas/efectivo - Venta Efectivo New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clienteId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/efectivo",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"efectivo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ventas/tarjeta - Venta Tarjeta New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clienteId\": 1,\n    \"cantidadCuotas\" : 12\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/tarjeta",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"tarjeta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ventas/{ventaId}/items - Agregar Item a la Venta New",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cantidad\":2,\n    \"prendaId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/1/items",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ventas/{ventaId}/items/ - Modificar Item a la Venta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cantidad\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/1/items/1",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"1",
+								"items",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ventas/{ventaId}/items/ - Delete Item a la Venta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host-api}}:{{port-api}}/tienda/api/ventas/2/items/3",
+							"protocol": "http",
+							"host": [
+								"{{host-api}}"
+							],
+							"port": "{{port-api}}",
+							"path": [
+								"tienda",
+								"api",
+								"ventas",
+								"2",
+								"items",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
