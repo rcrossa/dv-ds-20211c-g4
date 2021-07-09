@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.davinci.dvds2021cg4.controller.TiendaApp;
+import ar.edu.davinci.dvds2021cg4.controller.response.VentaResponse;
 import ar.edu.davinci.dvds2021cg4.domain.Venta;
 import ar.edu.davinci.dvds2021cg4.domain.VentaEfectivo;
 import ar.edu.davinci.dvds2021cg4.domain.VentaTarjeta;
 import ar.edu.davinci.dvds2021cg4.exception.BusinessException;
 import ar.edu.davinci.dvds2021cg4.service.VentaService;
+import ma.glasnost.orika.MapperFacade;
 
 @Controller
 public class VentaController extends TiendaApp {
@@ -30,6 +32,10 @@ public class VentaController extends TiendaApp {
 
 	@Autowired
 	private VentaService ventaService;
+	
+    
+    @Autowired
+    private MapperFacade mapper;
 
 	@GetMapping(path = "ventas/list")
 	public String showVentaPage(Model model) {
@@ -39,9 +45,19 @@ public class VentaController extends TiendaApp {
 		Page<Venta> ventas = ventaService.list(pageable);
 		LOGGER.info("GET - showVentaPage venta importe final: " + ventas.getContent().toString());
 
-		model.addAttribute("listVentas", ventas);
+        Page<VentaResponse> ventaResponse = null;
+
+        try {
+            ventaResponse = ventas.map(venta -> mapper.map(venta, VentaResponse.class));
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        
+		model.addAttribute("listVentas", ventaResponse);
 
 		LOGGER.info("ventas.size: " + ventas.getNumberOfElements());
+		
 		return "ventas/list_ventas";
 	}
 

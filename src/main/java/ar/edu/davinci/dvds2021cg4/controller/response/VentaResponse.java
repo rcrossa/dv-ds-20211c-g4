@@ -26,5 +26,9 @@ public abstract class VentaResponse {
 	
 	private BigDecimal importeFinal;
 	
+	
+	private String getClienteRazonSocial() {
+		return cliente.getNombre() + " " + cliente.getApellido();
+	}
 
 }

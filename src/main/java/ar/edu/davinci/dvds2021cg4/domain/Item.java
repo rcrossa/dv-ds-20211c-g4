@@ -33,6 +33,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "venta_items")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Item implements Serializable {
