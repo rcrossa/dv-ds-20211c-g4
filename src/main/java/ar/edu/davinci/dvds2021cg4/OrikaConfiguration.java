@@ -1,40 +1,23 @@
 package ar.edu.davinci.dvds2021cg4;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import ar.edu.davinci.dvds2021cg4.controller.request.ClienteInsertRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.ClienteResponse;
-import ar.edu.davinci.dvds2021cg4.controller.request.ClienteUpdateRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.ItemInsertRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.ItemUpdateRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.PrendaInsertRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.PrendaUpdateRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.VentaEfectivoRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.VentaTarjetaRequest;
+import ar.edu.davinci.dvds2021cg4.controller.request.*;
 import ar.edu.davinci.dvds2021cg4.controller.response.ItemResponse;
 import ar.edu.davinci.dvds2021cg4.controller.response.PrendaResponse;
 import ar.edu.davinci.dvds2021cg4.controller.response.VentaEfectivoResponse;
-import ar.edu.davinci.dvds2021cg4.controller.response.VentaResponse;
 import ar.edu.davinci.dvds2021cg4.controller.response.VentaTarjetaResponse;
-import ar.edu.davinci.dvds2021cg4.domain.Cliente;
-import ar.edu.davinci.dvds2021cg4.domain.Item;
-import ar.edu.davinci.dvds2021cg4.domain.Prenda;
-import ar.edu.davinci.dvds2021cg4.domain.VentaEfectivo;
-import ar.edu.davinci.dvds2021cg4.domain.VentaTarjeta;
+import ar.edu.davinci.dvds2021cg4.domain.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
 
 
 @Configuration

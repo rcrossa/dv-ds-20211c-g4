@@ -6,7 +6,7 @@
 <title>Administrador de Ventas</title>
 </head>
 <body>
-	<div align="center">
+	<div  class="container" align="center">
 		<h1>Listado de Ventas</h1>
 		<br />
 
@@ -22,16 +22,16 @@
 				</tr>
 			</tbody>
 		</table>
-		<br />
-		<table border="1" cellpadding="10">
+		<br/>
+		<table border="2" cellpadding="20" style="border-color:black" width="50%">
 			<thead>
-				<tr>
-					<th>Venta ID</th>
-					<th>Fecha</th>
-					<th>Cliente Nombre</th>
-					<th>Cliente Apellido</th>
-					<th>Importe</th>
-					<th>Acciones</th>
+				<tr  style="background:red;color:white">
+					<th colspan="1" rowspan="1" >Venta ID</th>
+					<th colspan="1" rowspan="1">Fecha</th>
+					<th colspan="1" rowspan="1">Cliente Nombre</th>
+					<th colspan="1" rowspan="1">Cliente Apellido</th>
+					<th colspan="1" rowspan="1">Importe</th>
+					<th colspan="1" rowspan="1">Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,14 +40,13 @@
 					<td th:text="${venta.fecha}">Fecha</td>
 					<td th:text="${venta.cliente.nombre}">Nombre</td>
 					<td th:text="${venta.cliente.apellido}">Apellido</td>
-					<td th:text="${venta.importeFinal}" class="number"
-						style="text-align: right;">Importe Final</td>
+					<td th:text="${venta.importeFinal}" class="number"	style="text-align: right;">Importe Final</td>
 					<td><a th:href="@{'/tienda/ventas/edit/' + ${venta.id}}">Editar</a>
-						&nbsp;&nbsp;&nbsp; <a
-						th:href="@{'/tienda/ventas/delete/' + ${venta.id}}">Borrar</a></td>
-					<table border="1" cellpadding="10">
+						&nbsp;&nbsp;&nbsp;
+						<a th:href="@{'/tienda/ventas/delete/' + ${venta.id}}">Borrar</a></td>
+					<table border="2" cellpadding="10" style="border-color:black; text-align:center" width="50%">
 						<thead>
-							<tr>
+							<tr  style="background:red;color:white">
 								<th>ID</th>
 								<th>Cantidad</th>
 								<th>Prenda</th>
@@ -58,11 +57,10 @@
 							<tr th:each="item : ${venta.items}">
 								<td th:text="${item.id}">Item ID</td>
 								<td th:text="${item.cantidad}">Cantidad</td>
-								<td th:text="${item.prenda}">Prenda</td>
+								<td th:text="${item.prenda.descripcion}">Prenda</td>
 								<td th:text="${item.importe}" class="number">Importe</td>
 							</tr>
 						</tbody>
-
 					</table>
 				</tr>
 			</tbody>
