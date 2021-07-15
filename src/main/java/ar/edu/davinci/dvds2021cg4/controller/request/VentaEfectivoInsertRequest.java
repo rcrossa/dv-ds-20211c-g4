@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VentaTarjetaRequest {
+public class VentaEfectivoInsertRequest {
 
 	private Long clienteId;
-
-	private Integer cantidadCuotas;
-
 }

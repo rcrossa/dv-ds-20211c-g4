@@ -5,6 +5,8 @@ import ar.edu.davinci.dvds2021cg4.controller.response.ItemResponse;
 import ar.edu.davinci.dvds2021cg4.controller.response.PrendaResponse;
 import ar.edu.davinci.dvds2021cg4.controller.response.VentaEfectivoResponse;
 import ar.edu.davinci.dvds2021cg4.controller.response.VentaTarjetaResponse;
+import ar.edu.davinci.dvds2021cg4.controller.view.request.VentaEfectivoCreateRequest;
+import ar.edu.davinci.dvds2021cg4.controller.view.request.VentaTarjetaCreateRequest;
 import ar.edu.davinci.dvds2021cg4.domain.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ma.glasnost.orika.CustomMapper;
@@ -17,7 +19,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 @Configuration
@@ -99,16 +105,37 @@ public class OrikaConfiguration {
         
         // VENTA EFECTIVO
         
-        mapperFactory.classMap(VentaEfectivoRequest.class, VentaEfectivo.class)
-        .customize(new CustomMapper<VentaEfectivoRequest, VentaEfectivo>() {
-            public void mapAtoB(final VentaEfectivoRequest ventaEfectivoRequest, final VentaEfectivo venta, final MappingContext context) {
-                LOGGER.info(" #### Custom mapping for VentaEfectivoRequest --> VentaEfectivo #### ");
+        mapperFactory.classMap(VentaEfectivoInsertRequest.class, VentaEfectivo.class)
+        .customize(new CustomMapper<VentaEfectivoInsertRequest, VentaEfectivo>() {
+            public void mapAtoB(final VentaEfectivoInsertRequest ventaEfectivoRequest, final VentaEfectivo venta, final MappingContext context) {
+                LOGGER.info(" #### Custom mapping for VentaEfectivoInsertRequest --> VentaEfectivo #### ");
                 Cliente cliente = Cliente.builder()
                         .id(ventaEfectivoRequest.getClienteId())
                         .build();
                 venta.setCliente(cliente);
             }
         }).register();
+        
+        mapperFactory.classMap(VentaEfectivoCreateRequest.class, VentaEfectivo.class)
+        .customize(new CustomMapper<VentaEfectivoCreateRequest, VentaEfectivo>() {
+            public void mapAtoB(final VentaEfectivoCreateRequest ventaEfectivoRequest, final VentaEfectivo venta, final MappingContext context) {
+                LOGGER.info(" #### Custom mapping for VentaEfectivoCreateRequest --> VentaEfectivo #### ");
+                Cliente cliente = Cliente.builder()
+                        .id(ventaEfectivoRequest.getClienteId())
+                        .build();
+                venta.setCliente(cliente);
+        		DateFormat formatearFecha = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+                Date fecha;
+				try {
+					fecha = formatearFecha.parse(ventaEfectivoRequest.getFecha());
+	        		venta.setFecha(fecha);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        }).register();
+        
         
         mapperFactory.classMap(VentaEfectivo.class, VentaEfectivoResponse.class)
         .customize(new CustomMapper<VentaEfectivo, VentaEfectivoResponse>() {
@@ -150,10 +177,10 @@ public class OrikaConfiguration {
         
         // VENTA TARJETA
         
-        mapperFactory.classMap(VentaTarjetaRequest.class, VentaTarjeta.class)
-        .customize(new CustomMapper<VentaTarjetaRequest, VentaTarjeta>() {
-            public void mapAtoB(final VentaTarjetaRequest ventaTarjetaRequest, final VentaTarjeta venta, final MappingContext context) {
-                LOGGER.info(" #### Custom mapping for VentaTarjetaRequest --> VentaTarjeta #### ");
+        mapperFactory.classMap(VentaTarjetaInsertRequest.class, VentaTarjeta.class)
+        .customize(new CustomMapper<VentaTarjetaInsertRequest, VentaTarjeta>() {
+            public void mapAtoB(final VentaTarjetaInsertRequest ventaTarjetaRequest, final VentaTarjeta venta, final MappingContext context) {
+                LOGGER.info(" #### Custom mapping for VentaTarjetaInsertRequest --> VentaTarjeta #### ");
                 Cliente cliente = Cliente.builder()
                         .id(ventaTarjetaRequest.getClienteId())
                         .build();
@@ -161,7 +188,29 @@ public class OrikaConfiguration {
                 venta.setCantidadCuotas(ventaTarjetaRequest.getCantidadCuotas());
             }
         }).register();
-        //mapperFactory.classMap(Cliente.class, ClienteUpdateRequest.class).byDefault().register();
+
+        mapperFactory.classMap(VentaTarjetaCreateRequest.class, VentaTarjeta.class)
+        .customize(new CustomMapper<VentaTarjetaCreateRequest, VentaTarjeta>() {
+            public void mapAtoB(final VentaTarjetaCreateRequest ventaTarjetaRequest, final VentaTarjeta venta, final MappingContext context) {
+                LOGGER.info(" #### Custom mapping for VentaTarjetaCreateRequest --> VentaEfectivo #### ");
+                Cliente cliente = Cliente.builder()
+                        .id(ventaTarjetaRequest.getClienteId())
+                        .build();
+                venta.setCliente(cliente);
+                venta.setCantidadCuotas(ventaTarjetaRequest.getCantidadCuotas());
+        		DateFormat formatearFecha = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+                Date fecha;
+				try {
+					fecha = formatearFecha.parse(ventaTarjetaRequest.getFecha());
+	        		venta.setFecha(fecha);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        }).register();
+        
+        
         mapperFactory.classMap(VentaTarjeta.class, VentaTarjetaResponse.class)
         .customize(new CustomMapper<VentaTarjeta, VentaTarjetaResponse>() {
             public void mapAtoB(final VentaTarjeta venta, final VentaTarjetaResponse ventaResponse, final MappingContext context) {

@@ -1,4 +1,4 @@
-package ar.edu.davinci.dvds2021cg4.controller.request;
+package ar.edu.davinci.dvds2021cg4.controller.view.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class VentaEfectivoRequest {
+public class VentaTarjetaCreateRequest {
 
 	private Long clienteId;
+
+	private String fecha; 
+
+	private Integer cantidadCuotas;
+
 }

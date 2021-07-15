@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.edu.davinci.dvds2021cg4.controller.TiendaAppRest;
 import ar.edu.davinci.dvds2021cg4.controller.request.ItemInsertRequest;
 import ar.edu.davinci.dvds2021cg4.controller.request.ItemUpdateRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.VentaEfectivoRequest;
-import ar.edu.davinci.dvds2021cg4.controller.request.VentaTarjetaRequest;
+import ar.edu.davinci.dvds2021cg4.controller.request.VentaEfectivoInsertRequest;
+import ar.edu.davinci.dvds2021cg4.controller.request.VentaTarjetaInsertRequest;
 import ar.edu.davinci.dvds2021cg4.controller.response.VentaResponse;
 import ar.edu.davinci.dvds2021cg4.domain.Item;
 import ar.edu.davinci.dvds2021cg4.domain.Venta;
@@ -119,7 +119,7 @@ public class VentaControllerRest extends TiendaAppRest{
      * @return un venta nueva
      */
     @PostMapping(path = "/ventas/efectivo")
-    public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaEfectivoRequest datosVenta) {
+    public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaEfectivoInsertRequest datosVenta) {
         VentaResponse ventaResponse = null;
         
         VentaEfectivo venta = mapper.map(datosVenta, VentaEfectivo.class);
@@ -135,7 +135,7 @@ public class VentaControllerRest extends TiendaAppRest{
      * @return un venta nueva
      */
     @PostMapping(path = "/ventas/tarjeta")
-    public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaTarjetaRequest datosVenta) {
+    public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaTarjetaInsertRequest datosVenta) {
         VentaResponse ventaResponse = null;
         
         VentaTarjeta venta = mapper.map(datosVenta, VentaTarjeta.class);

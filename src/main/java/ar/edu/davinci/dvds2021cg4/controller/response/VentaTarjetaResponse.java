@@ -12,15 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class VentaTarjetaResponse {
+public class VentaTarjetaResponse extends VentaResponse{
 
-	private Long id;
-
-	private ClienteResponse cliente;
-
-	private String fecha;
-	
-	private List<ItemResponse> items;
 	private Integer cantidadCuotas;
 
 	private BigDecimal coeficienteTarjeta;
