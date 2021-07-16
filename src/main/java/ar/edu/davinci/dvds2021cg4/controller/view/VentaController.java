@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import ar.edu.davinci.dvds2021cg4.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,9 @@ public class VentaController extends TiendaApp {
 
 	@Autowired
 	private VentaService ventaService;
-	
+
+	@Autowired
+	private ItemService itemService;
     
     @Autowired
     private MapperFacade mapper;
@@ -184,6 +187,8 @@ public class VentaController extends TiendaApp {
 		return mav;
 	}
 
+
+
 	@RequestMapping(value = "/ventas/delete/{id}", method = RequestMethod.GET)
 	public String deleteVenta(@PathVariable(name = "id") Long ventaId) {
 		LOGGER.info("GET - deleteVenta - /ventas/delete/{id}");
@@ -191,5 +196,14 @@ public class VentaController extends TiendaApp {
 		ventaService.delete(ventaId);
 		return "redirect:/tienda/ventas/list";
 	}
+	@RequestMapping(value = "/item/delete/{id}", method = RequestMethod.GET)
+	public String deleteItem(@PathVariable(name= "id")Long itemId){
+		LOGGER.info("Get - deleteItem - /item/delete/{id}");
+		LOGGER.info("item: " + itemId);
+		itemService.delete(itemId);
+		return "redirect:/tienda/ventas/list";
+	}
+
+
 
 }

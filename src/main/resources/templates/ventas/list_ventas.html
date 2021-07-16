@@ -13,12 +13,15 @@
 		<table>
 			<tbody>
 				<tr>
-					<th><a href="/tienda">Volver al menú pricipal</a></th>
+					<th><button style="background-color: #008CBA; font-size: medium; font-family:Arial; ">
+						<a style="color: white" href="/tienda">Volver al menú pricipal</a></button></th>
 					<th>&nbsp;</th>
-					<th><a href="/tienda/ventas/efectivo/new">Crear una nueva
-							Venta Efectivo</a></th>
-					<th><a href="/tienda/ventas/tarjeta/new">Crear una nueva
-							Venta Tarjeta</a></th>
+					<th><button style="background-color: #008CBA; font-size: medium; font-family:Arial;">
+						<a style="color: white"  href="/tienda/ventas/efectivo/new">Crear una nueva
+							Venta Efectivo</a></button></th>
+					<th><button style="background-color: #008CBA; font-size: medium; font-family:Arial;">
+						<a style="color: white"  href="/tienda/ventas/tarjeta/new">Crear una nueva
+							Venta Tarjeta</a></button></th>
 				</tr>
 			</tbody>
 		</table>
@@ -26,11 +29,11 @@
 		<table border="2" cellpadding="20" style="border-color:black" width="50%">
 			<thead>
 				<tr  style="background:gray;color:white">
-					<th colspan="1" rowspan="1" >Ventas</th>
+					<th colspan="1" rowspan="1"  style="background-blend-mode: color-dodge">Ventas</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="venta : ${listVentas}">
+				<tr  th:each="venta : ${listVentas}">
 					<table border="2" cellpadding="20" style="border-color:black" width="50%">
 						<thead>
 							<tr  style="background:red;color:white">
@@ -59,6 +62,7 @@
 											<th>Cantidad</th>
 											<th>Prenda</th>
 											<th>Importe</th>
+											<th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -67,6 +71,8 @@
 											<td th:text="${item.cantidad}">Cantidad</td>
 											<td th:text="${item.prenda.descripcion}">Prenda</td>
 											<td th:text="${item.importe}" class="number">Importe</td>
+											<td>&nbsp;&nbsp;&nbsp;
+											<a th:href="@{'/tienda/item/delete/' + ${item.id}}">Borrar</a></td>
 										</tr>
 									</tbody>
 								</table>
