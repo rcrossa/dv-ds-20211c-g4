@@ -14,46 +14,50 @@
                 <tr>
                     <th><a href="/tienda">Volver al menú pricipal</a></th>
                     <th>&nbsp;</th>
-                    <th><a href="/tienda/prendas/list">Volver</a></th>
+                    <th><a href="/tienda/ventas/list">Volver</a></th>
                 </tr>
             </tbody>
         </table>
         <br />
-        <form action="#" th:action="@{/tienda/prendas/save}"
-            th:object="${prenda}" method="post">
+       <form action="#" th:action="@{/tienda/prendas/save}"
+            th:object="${venta}" method="post">
 
-            <table border="0" cellpadding="10">
-                <tr>
-                    <td>Prenda ID:</td>
-                    <td><input type="text" th:field="*{id}" readonly="readonly" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Descripción:</td>
-                    <td><input type="text" th:field="*{descripcion}" /></td>
-                </tr>
-                <tr>
-                    <td>Tipo:</td>
-                    <td th:object="${tipoPrendas}">
-                        <select id="tipo" name="tipo">
-                              <option value="">Elija un tipo</option>
-                            <option th:each="tipoPrenda : ${tipoPrendas}"
-                                    th:value="${tipoPrenda}"
-                                    th:text="${tipoPrenda.descripcion}"
-                                    th:selected="${tipoPrenda==tipoPrendaActual}">
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Precio Base:</td>
-                    <td><input type="text" th:field="*{precioBase}" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><button type="submit">Grabar</button></td>
-                </tr>
-            </table>
-        </form>
+               <table border="0" cellpadding="10">
+                  <tr>
+                      <td>Prenda ID:</td>
+                      <td><input type="text" th:field="*{id}" readonly="readonly" />
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>Nombre:</td>
+                      <td><input type="text" th:field="*{cliente.nombre}" /></td>
+                  </tr>
+                   <tr>
+                       <td>Apellido:</td>
+                       <td><input type="text" th:field="*{cliente.apellido}" /></td>
+                   </tr>
+                    <tr>
+                         <td>Tipo:</td>
+                        <td th:object="${venta.items}">
+                            <select id="tipo" name="tipo">
+                                <option value="">Elija un tipo</option>
+                                <option th:each="item : ${venta.items}"
+                                        th:value="${venta.items}"
+                                        th:text="${item.prenda.descripcion}"
+                                        th:selected="${venta.items==venta.items}">
+                                </option>
+                            </select>
+                         </td>
+                     </tr>
+<!--                     <tr>
+                         <td>Precio Base:</td>
+                         <td><input type="text" th:field="*{item.prenda.precioBase}" /></td>
+                     </tr>-->
+                     <tr>
+                         <td colspan="2"><button type="submit">Grabar</button></td>
+                     </tr>
+              </table>
+          </form>
     </div>
 </body>
 </html>

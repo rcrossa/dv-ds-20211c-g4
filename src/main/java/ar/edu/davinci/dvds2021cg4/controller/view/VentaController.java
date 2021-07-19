@@ -187,8 +187,6 @@ public class VentaController extends TiendaApp {
 		return mav;
 	}
 
-
-
 	@RequestMapping(value = "/ventas/delete/{id}", method = RequestMethod.GET)
 	public String deleteVenta(@PathVariable(name = "id") Long ventaId) {
 		LOGGER.info("GET - deleteVenta - /ventas/delete/{id}");
