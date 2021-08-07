@@ -19,3 +19,4 @@ VALUES
 ('Camisa Gris Oscuro',203.00,'CAMISA'),
 ('Bufanda',34.45,'CAMISA'),
 ('Media',9898.00,'TAPADO');
+commit;
