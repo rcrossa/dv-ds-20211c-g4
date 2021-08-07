@@ -1,6 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
+<style>
+	.button {
+		border-radius: 4px;
+		box-shadow: 0 9px #999;
+		background-color: #f4511e;
+		border: none;
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 20px;
+		padding: 18px;
+		width: 200px;
+		transition: all 0.5s;
+		cursor: pointer;
+		margin: 5px;
+	}
+
+	.button a {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+
+	.button a:after {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+
+	.button:hover a {
+		padding-right: 25px;
+	}
+
+	.button:hover a:after {
+		opacity: 1;
+		right: 0;
+	}
+	.button:active {
+		background-color: red;
+		box-shadow: 0 5px #666;
+		transform: translateY(4px);
+	}
+	h1{
+		background-color: darkorange; color: azure; font-family: 'Helvetica Neue';
+	}
+</style>
 <head>
 <meta charset="utf-8" />
 <title>Administrador de Ventas</title>
@@ -13,20 +62,20 @@
 		<table>
 			<tbody>
 				<tr>
-					<th><button style="background-color: #008CBA; font-size: medium; font-family:Arial; ">
-						<a style="color: white" href="/tienda">Volver al menú pricipal</a></button></th>
+					<th><button class="button">
+						<a style="color: white;" href="/tienda">Volver al menú pricipal</a></button></th>
 					<th>&nbsp;</th>
-					<th><button style="background-color: #008CBA; font-size: medium; font-family:Arial;">
+					<th><button class="button" style="background-color: #008CBA; font-size: medium; font-family:Arial;">
 						<a style="color: white"  href="/tienda/ventas/efectivo/new">Crear una nueva
 							Venta Efectivo</a></button></th>
-					<th><button style="background-color: #008CBA; font-size: medium; font-family:Arial;">
+					<th><button class="button" style="background-color: #008CBA; font-size: medium; font-family:Arial;">
 						<a style="color: white"  href="/tienda/ventas/tarjeta/new">Crear una nueva
 							Venta Tarjeta</a></button></th>
 				</tr>
 			</tbody>
 		</table>
 		<br/>
-		<table border="2" cellpadding="20" style="border-color:black" width="50%">
+		<table border="2" cellpadding="30" style="border-color:black" width="50%">
 			<thead>
 				<tr  style="background:gray;color:white">
 					<th colspan="1" rowspan="1"  style="background-blend-mode: color-dodge">Ventas</th>
@@ -42,7 +91,8 @@
 								<th colspan="1" rowspan="1">Cliente Nombre</th>
 								<th colspan="1" rowspan="1">Cliente Apellido</th>
 								<th colspan="1" rowspan="1">Importe</th>
-								<th colspan="1" rowspan="1">Acciones</th>
+								<th colspan="1" rowspan="1">Modificar</th>
+								<th colspan="1" rowspan="1">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -52,9 +102,9 @@
 								<td th:text="${venta.cliente.nombre}">Nombre</td>
 								<td th:text="${venta.cliente.apellido}">Apellido</td>
 								<td th:text="${venta.importeFinal}" class="number"	style="text-align: right;">Importe Final</td>
-								<td><a th:href="@{'/tienda/ventas/edit/' + ${venta.id}}">Editar</a>
+								<td class="button"><a th:href="@{'/tienda/ventas/edit/' + ${venta.id}}">Editar</a></td>
 									&nbsp;&nbsp;&nbsp;
-									<a th:href="@{'/tienda/ventas/delete/' + ${venta.id}}">Borrar</a></td>
+								<td class="button"><a th:href="@{'/tienda/ventas/delete/' + ${venta.id}}">Borrar</a></td>
 								<table border="2" cellpadding="10" style="border-color:black; text-align:center" width="50%">
 									<thead>
 										<tr  style="background:blue;color:white">
@@ -67,13 +117,12 @@
 									</thead>
 									<tbody>
 										<tr th:each="item : ${venta.items}">
-											<td th:text="${item.id}">Item ID</td>
+											<td th:text="${item.id}">Item ID</td>											&nbsp;&nbsp;
 											<td th:text="${item.cantidad}">Cantidad</td>
 											<td th:text="${item.prenda.descripcion}">Prenda</td>
 											<td th:text="${item.importe}" class="number">Importe</td>
-											<td>&nbsp;&nbsp;&nbsp;
-												<a th:href="@{'/tienda/ventas/editI/' + ${item.id}}">Editar</a>
-											<a th:href="@{'/tienda/item/delete/' + ${item.id}}">Borrar</a></td>-->
+											<td  class="button"><a id="itemtabla"  th:href="@{'/tienda/ventas/edit/' + ${item.id}}">Editar</a>
+												&nbsp;<a id="itemtabla"  th:href="@{'/tienda/item/delete/' + ${item.id}}">Borrar</a></td>
 										</tr>
 									</tbody>
 								</table>

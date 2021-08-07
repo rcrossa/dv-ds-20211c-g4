@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org">
+<style>
+    .button {
+        border-radius: 4px;
+        box-shadow: 0 9px #999;
+        background-color: #f4511e;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 300px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .button a {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+        color: white;
+    }
+
+    .button a:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    .button:hover a {
+        padding-right: 25px;
+        color: blueviolet;
+    }
+
+    .button:hover a:after {
+        opacity: 1;
+        right: 0;
+    }
+    .button:active {
+        background-color: red;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+    #itemtabla{
+        font-size: 18px;
+        font-style: initial;
+        color: orangered;
+    }
+    #itemtabla:hover{
+        font-size: 18px;
+        font-style: italic;
+        background-color: deepskyblue;
+    }
+    h1{
+        background-color: darkorange; color: azure; font-family: 'Helvetica Neue';
+    }
+
+</style>
 <head>
 <meta charset="utf-8" />
 <title>Crea un nuevo Prenda</title>
@@ -12,9 +74,9 @@
         <table>
             <tbody>
                 <tr>
-                    <th><a href="/tienda">Volver al menú pricipal</a></th>
+                    <th class="button"><a href="/tienda">Volver al menú pricipal</a></th>
                     <th>&nbsp;</th>
-                    <th><a href="/tienda/prendas/list">Volver</a></th>
+                    <th class="button"><a href="/tienda/prendas/list">Volver</a></th>
                 </tr>
             </tbody>
         </table>
@@ -44,7 +106,7 @@
                     <td><input type="text" th:field="*{precioBase}" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><button type="submit">Grabar</button></td>
+                    <td class="button" colspan="2"><button type="submit"><a id="itemtabla" >Grabar</a></button></td>
                 </tr>
             </table>
         </form>
